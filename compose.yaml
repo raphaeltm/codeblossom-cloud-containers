@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  api:
+    deploy:
+      replicas: 5
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - API_URL=http://api:3000
+
